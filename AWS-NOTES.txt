@@ -1,0 +1,179 @@
+EC2 
+1.ec2 means elastic cloud compute,it is a virtual machine.
+2.Ec2 is a web-service which aims to make life easier for developers by providing secure and re-sizable compute capacity in the clouds.
+3.With ec2 it is very easy to scale up and scale down or infra structure based on the demand.
+4.The best part could be pay only for what you use.
+
+
+Ec2 instance Amazon Elastic Compute Cloud
+Choose ami(amazon machine image): 
+1. if you can create an ami that’s really the software and application packages we would need to run the applications.
+2. Ami is a template that is used to create a new instance/machine based on user requirement.
+3.  Ami would contain software information ,operating system information,volume information,access permissions information about volumes they all are compact  in ami
+ AMI’S are two types 
+1.predefined ami’s: predefined amis are called by amazon  and can be modified by the user.
+2.Custom ami’s: custom amis are created by the user so that they an be reused.
+Choose instance type :  
+1. this is second one choose the hardware in here choose instance type. 
+2. depending the work load we would choose the hard ware and depending on the instance of the work load we would choosing the size of the hardware. 
+Configure instance : 
+1. we wood configure the instances and how many instances do I want and which subnet do I want ,
+2. them in and whats going on to be stop and terminate ,behaviour of the instances.
+3. do I want update any patches when the instance starts running all those information going on here configure the instance.
+Add storage:
+ 1.  Here we would Add and additional storage to the ec2 instance 
+Add tags: 
+1. We use tags easily to identify the ec2 instance at the point we give some meaningful names,
+2. so we would identifying which team we belongs to billing department it’s belongs to ,and what the purpose to behind to launching this instance like that.
+3. in an environment we would run 700 and even more instances identify in the instances and trying to understanding  and who owns the resource  and what purpose to create it could be an full time works.
+Configure security groups: 
+1.  We would configure the firewall which is also called as security group for ec2 instance .
+2. this is where we allow and adenine connection for external word to this  particulate ec2 instance.
+3. well it works both ways from our side and inside out this fire wall blocks the connection based on port number and ip address 
+Review:  
+1.All configurations make done and all configurations what we want and finally click on submit and launch the ec2 instance
+
+WEB APPLICATION DEPLOYMENT
+STEP 1:
+    SERVER CREATION
+       1.choose ami ---default
+       2.choose instance type --T2.MICRO
+       3.configur instance---DEFAULT
+       4.add storage---DEfault
+       5.ADD TAGS--name
+       6.CONFIGUR SECURITY GROUP--HTTP and HTTPS ports allow
+       7.review 
+           keypair download
+           launch instance
+STEP 2:
+
+      go to  putty gen pem to ppk
+               putty----> paste pub ip
+               ssh---auth---browse--open--select ppk file----open
+step 3:
+                                                  
+   1. login as----ec2-user
+   2. root user---sudo -i
+   3. update packages---yum update -y
+   4.install packages---yum install httpd -y
+   5.create html directory--cd /var/www/html
+   6.file creation -----vi index.html<<<<<<<< "i"i means insert you can write some content >>>>><<<<<< esc :wq>>>>>>>
+   7.service start------service httpd start
+step 4:
+    goto terminal copy public ip open new tab-----paste and search
+*******************************************************************************************************************************************************************
+login as:amazonlinux---ec2-user
+         centos--------centos
+         ubuntu-------ubuntu
+         redhat-------ec2-user
+********************************************************************************************************************************************************************
+WEBSITE HOSTING
+   STEP 1:
+    SERVER CREATION
+       1.choose ami ---default
+       2.choose instance type --T2.MICRO
+       3.configur instance---DEFAULT
+       4.add storage---DEfault
+       5.ADD TAGS--name
+       6.CONFIGUR SECURITY GROUP--HTTP and HTTPS ports allow
+       7.review 
+           keypair download
+           launch instance
+STEP 2:
+
+      go to  putty gen pem to ppk
+               putty paste pub ip
+               ssh---auth---browse--open--select ppk file----open
+step 3:
+                                                  
+   1. login as----> ec2-user  
+   2. root user---> sudo -i
+   3. update packages---> yum update -y
+   4.install packages---> yum install httpd -y
+   5.create html directory----> cd /var/www/html
+   6.file creation -----> vi index.html<<<<<<<< i  you can write some content >>>>><<<<<< esc :wq>>>>>>>
+   7.service start------> service httpd start
+step 4:
+    goto terminal copy public ip open new tab-----paste and search
+step 5:
+   go R53----create record set----TTL (Seconds):60
+                                  Value:paste PUBLIC IP------CREATE
+          go to new tab---enter domine name---check op
+
+**************************************************************************************************************************************************************************************************
+LOAD BALANCER
+
+1.A load balancer distributes incoming application traffic across multiple EC2 instances in multiple Availability Zones. 
+2.This increases the fault tolerance of your applications Elastic Load Balancing detects unhealthy instances and routes traffic only to healthy instances
+
+
+NON-SECURE LOAD BALANCER
+STEP 1:
+   3 SERVRS CREATE-------YOU CAN CHEK THE OP WITH PUBLIC IP
+STEP 2:
+     CREATE LOAD BALANCER------classical loadbalancer---- 1.Define Load Balancer 
+                                                                    loadbalancer name
+                                                                    Enable advanced VPC configuration---SELECT
+                                                                    add all subnets----go to second step
+                                                          2.Assign Security Groups
+                                                                    Create a new security group
+                                                          3.Configure Security Settings
+                                                          4.Configure Health Check
+                                                          5.Add EC2 Instances(meeru create chesina instances add cheyali )
+                                                          6.Add Tags
+                                                          7.review and create
+                   Instances status -outofsrevice to INSERVICE ----YOU CAN CHECK THE OP WITH DNS NAME
+STEP 3:
+       GOTO R53---CREATE RECORD SET---ALIAS YES ---Alias Target:LOADBALANCER DNS----CREATE
+                  go to new tab---enter domine name---check op
+
+*******************************************************************************************************************************************************************************************************
+
+SECURE LOAD BALANCER
+STEP 1:
+    3 SERVRS CREATE-------YOU CAN CHEK THE OP WITH PUBLIC IP
+STEP2:
+     CREATE ACM CERTIFICATE(CERTIFICATE MANAGER)
+                      SELECT---PROVISION CERTIFICATE
+                        1.Request a certificate
+                        2.Request a public certificate
+                        3.Add domain name
+                        4.Select validation method---DNS validation
+                        5.Add tags
+                        6.Review
+                        7.Validation-------SUCCESS
+                         DOMINE NAME DRAG AND CNANE add in R53
+STEOP 3:
+  CREATE LOAD BALANCER------classical loadbalancer---- 1.Define Load Balancer 
+                                                              loadbalancer name
+                                                              Enable advanced VPC configuration----SELECT
+                                                              add HTTPS PORT
+                                                              add all subnets----go to second step
+                                                       2.Assign Security Groups
+                                                               Create a new security group
+                                                       3 .Configure Security Settings
+                                                       4.Configure Health Check
+                                                       5.Add EC2 Instances(meeru create chesina instances add cheyali )
+                                                       6. Add Tags
+                                                       7.review and create
+                   Instances status -outofsrevice to INSERVICE ----YOU CAN CHECK THE OP WITH DNS NAME
+STEP 4:
+    GOTO R53---CREATE RECORD SET---ALIAS YES ---Alias Target:SECURE LOAD BALANCER DNS----CREATE
+                  go to new tab---enter HTTPS://domine name---check op
+
+                                                                      
+********************************************************************************************************************************************************************                                                                        
+S3
+
+s3-simple storage service
+1.Amazon S3 provides object (file) based storage.
+2.Amazon s3 has a simple web service interface that you can use to store, and retrieve any amount of data from “buckets” at any time from anywhere on the web.
+3.it is high durable,flexible,cost efficient, scalable and secure.
+4.In S3 bucket you can store unlimited volume of data and number of objects.
+5.A single Amazon S3 objects can be a size of range 0 bytes to 5 terabytes.
+6.Versioning allows us to keep multiple variants of an object in a bucket. Versioning helps us to restore an object to a previous or specific version of an object. 
+7.You can take advantage of versioning to recover a deleted or mistakenly overwritten object.
+***************************************************************************************************************************************************************************
+AUTOSCALING
+
+

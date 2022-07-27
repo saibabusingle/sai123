@@ -1,0 +1,82 @@
+HashiCrop:
+
+
+
+
+
+
+
+TERRAFORM
+1.terraform is developed by HashiCrop.
+2.It will work for many cloud providers like AWS,Azure,GCP....
+3.Terraform user HashiCops configuration language(HCL),a language built by HashiCprp. it is fully compatable with JSON.
+
+CLOUD FORMATION
+1.Cloud Formation is developed by AWS
+2.Cloud Formation will support only AWS.
+3.AWS CloudFormation utilizes eitherJSON OR YAML.
+4.CloudFormation has a limit of 51,000 bytes for the template body itself.
+
+
+PRE-REQUISITES
+1.Any cloud provider(AWS,GCP,Azure,Digital Ocean,OpenStack,etc)
+2.user credentials(secret key and Accesss key)
+3.Add the following policies to IAM user if you are using AWS as cloud provider.(AmazonEC2fullAcess),
+
+----------------------------------------------------------------------------------------------------------------------
+Create EC2-instance
+
+sudo -i
+yum update -y
+yum install wget unzip vim -y
+wget https://releases.hashicorp.com/terraform/0.14.9/terraform_0.14.9_linux_amd64.zip
+unzip terraform_0.14.9_linux_amd64.zip -d /usr/local/bin/
+terraform -v (OR) terraform version
+
+
+create user------programatic access---ec2full access------get access key and secretkey
+
+mkdir terraform
+cd terraform
+vi terraform.tf
+
+provider "aws" {
+  region = "ap-south-1"
+  access_key = "AIA4UQE3BUQ6GQ3BAEO"
+  secret_key = "5LAzj2tYFxf1NNvmvz0Z1UASoEzDZHlc6R5wHF"
+}
+
+resource "aws_instance" "AWSServer" {
+  ami = "ami-0a74bfeb190bd404f"
+  instance_type = "t2.micro"
+  key_name = "mithuntechnologies"
+  security_groups = ["launch-wizard-1"]
+  tags = {
+   Name = "Terrafrom Server"
+  }
+}
+
+
+ls
+
+terraform plan
+terraform init
+ls -la
+terraform fmt
+terraform validate
+terraform plan
+terraform apply
+ yes
+//terraform apply-auto-approve
+terraform destroy
+
+
+
+
+
+
+
+
+
+
+

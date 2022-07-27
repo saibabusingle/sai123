@@ -1,0 +1,18 @@
+git first commit:push
+
+git init  // our github----local
+git status //
+git add    //add file name
+git status //
+git commit -m "msg"
+git branch -m master---main, main to master//branch change
+git remote add origin "https://github.com/saikatheram/demo.git"
+git push -u origin main
+
+git push origin --delete
+
+ second commit:pull
+ 
+ git clone "url"
+ 
+ 
